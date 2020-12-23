@@ -4,7 +4,6 @@ import renderer from "react-test-renderer"
 import * as gatsby from "gatsby"
 
 import Image from "../image"
-import jestConfig from "../../../jest.config"
 
 describe("Image", () => {
   it("renders correctly", () => {
@@ -24,7 +23,11 @@ describe("Image", () => {
     const tree = renderer.create(<Image />).toJSON()
     gatsby.useStaticQuery = orig
 
-    expect(tree).toMatchSnapshot()
+    expect(tree).toMatchSnapshot();
+
+    const { props: { className } } = tree;
+
+    expect(className).toEqual(' gatsby-image-wrapper')
   })
 
   it("prints picture not found", () => {
